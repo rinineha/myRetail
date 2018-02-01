@@ -24,7 +24,7 @@ public class ProductResource {
     public ResponseEntity<Product> getByProductId(@PathVariable("id") String id) throws Exception{
         Product result = new Product();
         if( !id.isEmpty()) {
-            result = productService.getProductIdFromFile(id);
+            result = productService.findByProductId(id);
         }
         if( null != result.getId()){
             return new ResponseEntity<>( result , HttpStatus.OK);

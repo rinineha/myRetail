@@ -6,9 +6,19 @@ import org.springframework.data.annotation.Id;
 @JsonIgnoreProperties( value = {"createdAt"}, allowGetters = true)
 public class CurrentPrice {
 
+    private String productId;
+
     private Long value;
 
     private String currencyCode;
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
 
     public Long getValue() {
         return value;
@@ -29,6 +39,7 @@ public class CurrentPrice {
     @Override
     public String toString() {
         return "CurrentPrice{" +
+                "productId" + productId +
                 "value=" + value +
                 ", currencyCode='" + currencyCode + '\'' +
                 '}';

@@ -1,0 +1,20 @@
+<div class="product-search">
+  <h1 class="page-title">My Retail</h1>
+  <div class="product-search">
+    <form #productSearch="ngForm" (ngSubmit)="updateProduct(product)" novalidate>
+      <input type="text" id="title" class="form-control" placeholder="Type a product id "
+             required
+             name="title" [(ngModel)]="newProduct.id"
+             #title="ngModel" >
+      <div *ngIf="title.errors && title.dirty"
+           class="alert alert-danger">
+        <div [hidden]="!title.errors.required">
+          Id is required
+        </div>
+      </div>
+    </form>
+  </div>
+  <ul class="product-search">
+
+  </ul>
+</div>
