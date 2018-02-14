@@ -2,6 +2,10 @@
 This application uses Java 8 and Spring Framework 1.5.9 for backend
 Run 'mvn spring-boot:run' to launch application server  and starts on port `8080`
 
+# Before building the frontend, you must install Node as source or via packaged bundle
+# to install dependencies listed in package.json
+Run npm install
+
 # AngularFrontend Server
 Run '`cd angular-frontend`' to navigate to the frontend directory
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. 
