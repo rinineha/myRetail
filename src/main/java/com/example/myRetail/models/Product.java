@@ -3,7 +3,7 @@ package com.example.myRetail.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 
-@JsonIgnoreProperties( allowGetters = true)
+@JsonIgnoreProperties(allowGetters = true)
 public class Product {
 
     @Id

@@ -1,0 +1,32 @@
+/*Global Style Sheet*/
+
+body {
+  font-size: 18px;
+  line-height: 1.58;
+  background: #d53368;
+  background: -webkit-linear-gradient( to left, #cbad6d, #d53369);
+  background: linear-gradient(to left, #cbad6d, #d53369);
+  color: #333;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+i {
+  vertical-align: middle;
+  color: #626262;
+}
+
+input {
+  border: 1px solid #E8E8E8;
+}
+
+page-title {
+  text-align: center;
+}
+

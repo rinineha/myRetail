@@ -7,9 +7,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
 
 import javax.inject.Inject;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -25,9 +27,11 @@ public class ProductService {
     public Product findByProductId(String id) throws Exception {
         Product result = new Product();
         result = getProductNameFromFile(id);
-        result = getProductPriceFromDatabase(result);
+        return getProductPriceFromDatabase(result);
+    }
 
-        return result;
+    public Product updateProductPrice(Product product) throws Exception {
+        return updateProductPriceToDatabase(product);
     }
 
     public Product getProductNameFromFile(String id) throws Exception {
@@ -36,7 +40,7 @@ public class ProductService {
         Product result = new Product();
 
         try {
-            Object jsonObject = parser.parse(new FileReader("C://Users/NMathur/myRedSky.json"));
+            Object jsonObject = parser.parse(new FileReader(ResourceUtils.getFile("classpath:files/myRedSky.json")));
             JSONObject fileObject = (JSONObject) jsonObject;
             JSONObject productObject = (JSONObject) fileObject.get("product");
             JSONObject itemObject = (JSONObject) productObject.get("item");
@@ -54,12 +58,22 @@ public class ProductService {
     }
 
     public Product getProductPriceFromDatabase(Product product) throws Exception {
-        if( null != product && !StringUtils.isEmpty(product.getId())) {
+        if (null == product && StringUtils.isEmpty(product.getId())) {
             throw new Exception(" No pricing information found");
         }
-        CurrentPrice currentPrice = currentPriceRepository.findOneByProductId(product.getId());
-        product.setCurrentPrice( currentPrice );
+        CurrentPrice currentPrice = currentPriceRepository.findByProductId(product.getId());
+        product.setCurrentPrice(currentPrice);
 
+        return product;
+    }
+
+    public Product updateProductPriceToDatabase(Product product) throws Exception {
+        if (null == product && StringUtils.isEmpty(product.getId())) {
+            throw new Exception("Cannot update product");
+        }
+
+        CurrentPrice currentPrice = currentPriceRepository.save(product.getCurrentPrice());
+        product.setCurrentPrice(currentPrice);
         return product;
     }
 }

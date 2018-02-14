@@ -1,5 +1,10 @@
-export class Product {
+export interface Product {
   id: string;
-  title: string;
-  value: string;
+  name: string;
+  currentPrice: CurrentPrice;
+}
+
+export interface CurrentPrice {
+  value: number;
+  currencyCode: string;
 }

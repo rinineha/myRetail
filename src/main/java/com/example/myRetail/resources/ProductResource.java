@@ -21,20 +21,23 @@ public class ProductResource {
     private ProductService productService;
 
     @GetMapping("/products/{id}")
-    public ResponseEntity<Product> getByProductId(@PathVariable("id") String id) throws Exception{
+    public ResponseEntity<Product> getByProductId(@PathVariable("id") String id) throws Exception {
         Product result = new Product();
-        if( !id.isEmpty()) {
+        if (!id.isEmpty()) {
             result = productService.findByProductId(id);
         }
-        if( null != result.getId()){
-            return new ResponseEntity<>( result , HttpStatus.OK);
+        if (null != result.getId()) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @PutMapping("/products/{id}")
-    public ResponseEntity<Product> postByProductId(@Valid @RequestBody Product product) throws Exception{
-        return new ResponseEntity<>( product, HttpStatus.CREATED);
-
+    @PutMapping("/products")
+    public ResponseEntity<Product> postByProductId(@Valid @RequestBody Product product) throws Exception {
+        if (null != product) {
+            productService.updateProductPrice(product);
+            return new ResponseEntity<>(product, HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(product, HttpStatus.BAD_REQUEST);
     }
 }

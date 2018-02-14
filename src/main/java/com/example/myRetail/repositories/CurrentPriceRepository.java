@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CurrentPriceRepository extends MongoRepository<CurrentPrice, String>{
-    public CurrentPrice findOneByProductId( String productId);
+public interface CurrentPriceRepository extends MongoRepository<CurrentPrice, String> {
 
+    CurrentPrice findByProductId(String productId);
 }

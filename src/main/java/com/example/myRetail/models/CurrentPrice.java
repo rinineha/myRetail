@@ -2,15 +2,30 @@ package com.example.myRetail.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@JsonIgnoreProperties( value = {"createdAt"}, allowGetters = true)
+@Document(collection = "CurrentPrice")
+@JsonIgnoreProperties(value = {"productId", "id"}, allowSetters = true)
 public class CurrentPrice {
 
+    @Id
+    private Long id;
+
+    @Indexed
     private String productId;
 
-    private Long value;
+    private Double value;
 
     private String currencyCode;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getProductId() {
         return productId;
@@ -20,11 +35,11 @@ public class CurrentPrice {
         this.productId = productId;
     }
 
-    public Long getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(Long value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 
@@ -39,7 +54,6 @@ public class CurrentPrice {
     @Override
     public String toString() {
         return "CurrentPrice{" +
-                "productId" + productId +
                 "value=" + value +
                 ", currencyCode='" + currencyCode + '\'' +
                 '}';
